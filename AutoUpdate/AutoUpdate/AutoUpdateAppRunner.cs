@@ -27,11 +27,15 @@ namespace AutoUpdate
         public void Run(string[] args)
         {
             WaitForAppAvailability();
-            var dir = _repo.GenerateExecutiveArea();
-            var type = FindExecutive(dir);
+            try
+            {
+                var dir = _repo.GenerateExecutiveArea();
+                var type = FindExecutive(dir);
 
-            var app = (IAutoUpdateApplication)Activator.CreateInstance(type);
-            app.Start(args);
+                var app = (IAutoUpdateApplication)Activator.CreateInstance(type);
+                app.Start(args);
+            }
+            catch (Exception) when (InvalidateRepo()) { }
         }
 
         private Type FindExecutive(string dir)
@@ -45,6 +49,12 @@ namespace AutoUpdate
             }
 
             return apps.First();
+        }
+
+        private bool InvalidateRepo()
+        {
+            _repo.Clear();
+            return false;
         }
 
         private IEnumerable<Type> InspectLibraryForExecutable(string path)
