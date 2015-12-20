@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C45C92A1-C3B5-4236-A42E-E1180B2D0477}</ProjectGuid>
+    <ProjectGuid>{64837BA4-E500-4547-B073-FB150C6CF1C2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AutoUpdate.Example.Logic</RootNamespace>
-    <AssemblyName>AutoUpdate.Example.Logic</AssemblyName>
+    <RootNamespace>AutoUpdate.Common</RootNamespace>
+    <AssemblyName>AutoUpdate.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,14 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application.cs" />
+    <Compile Include="IAutoUpdateApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AutoUpdate.Common\AutoUpdate.Common.csproj">
-      <Project>{64837ba4-e500-4547-b073-fb150c6cf1c2}</Project>
-      <Name>AutoUpdate.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

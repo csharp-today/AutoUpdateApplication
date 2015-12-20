@@ -1,4 +1,5 @@
 ﻿using AutoUpdate.Blob;
+using AutoUpdate.Common;
 using AutoUpdate.Repo;
 using AutoUpdate.Updater;
 using System;
