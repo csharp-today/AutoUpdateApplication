@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoUpdate.Blob;
+using AutoUpdate.Repo;
+using AutoUpdate.Updater;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +13,14 @@ namespace AutoUpdate
     {
         public AutoUpdateAppRunner(string blobUrl)
         {
+            var appRepo = new ApplicationRepository();
+            var appUpdater = new ApplicationUpdater(appRepo, blobUrl);
+            appUpdater.Run();
         }
 
         public void Run(string[] args)
         {
+            System.Threading.Thread.Sleep(-1);
         }
     }
 }
