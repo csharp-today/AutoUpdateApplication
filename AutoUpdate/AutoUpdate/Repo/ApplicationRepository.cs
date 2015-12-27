@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoUpdate.Repo
 {
@@ -51,7 +49,7 @@ namespace AutoUpdate.Repo
             var path = Path.Combine(_dataPath, name);
             using (var stream = File.Create(path))
             {
-                data.CopyTo(stream);
+                stream.Write(data.GetBuffer(), 0, (int)data.Length);
             }
         }
 

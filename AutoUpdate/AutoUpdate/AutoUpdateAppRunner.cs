@@ -5,11 +5,9 @@ using AutoUpdate.Updater;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AutoUpdate
 {
@@ -48,7 +46,7 @@ namespace AutoUpdate
                 apps.AddRange(types);
             }
 
-            return apps.First();
+            return apps[0];
         }
 
         private bool InvalidateRepo()
@@ -66,9 +64,16 @@ namespace AutoUpdate
                 if (!type.IsInterface)
                 {
                     var interfaces = type.GetInterfaces();
-                    var autoUpdateInterfaces =
-                        interfaces.Where(i => i.Name == "IAutoUpdateApplication");
-                    if (autoUpdateInterfaces.Count() > 0)
+                    Type autoUpdateInterface = null;
+                    foreach (var i in interfaces)
+                    {
+                        if (i.Name == "IAutoUpdateApplication")
+                        {
+                            autoUpdateInterface = i;
+                        }
+                    }
+
+                    if (autoUpdateInterface != null)
                     {
                         apps.Add(type);
                     }

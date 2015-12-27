@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.Xml;
 
 namespace AutoUpdate.Blob
 {
     internal class BlobFile
     {
-        private readonly XDocument xml;
+        private readonly XmlDocument xml;
 
         private MemoryStream _cache;
 
@@ -21,8 +19,8 @@ namespace AutoUpdate.Blob
         {
             get
             {
-                var nameNode = xml.Descendants(XName.Get("Name")).First();
-                return nameNode.Value;
+                var nameNode = xml.SelectSingleNode("//Name");
+                return nameNode.InnerText;
             }
         }
 
@@ -30,8 +28,8 @@ namespace AutoUpdate.Blob
         {
             get
             {
-                var timeNode = xml.Descendants(XName.Get("Last-Modified")).First();
-                var time = Convert.ToDateTime(timeNode.Value);
+                var timeNode = xml.SelectSingleNode("//Last-Modified");
+                var time = Convert.ToDateTime(timeNode.InnerText);
                 return time;
             }
         }
@@ -40,14 +38,15 @@ namespace AutoUpdate.Blob
         {
             get
             {
-                var urlNode = xml.Descendants(XName.Get("Url")).First();
-                return urlNode.Value;
+                var urlNode = xml.SelectSingleNode("//Url");
+                return urlNode.InnerText;
             }
         }
 
         public BlobFile(string metadataXml)
         {
-            xml = XDocument.Parse(metadataXml);
+            xml = new XmlDocument();
+            xml.LoadXml(metadataXml);
         }
 
         public void Download()
@@ -57,7 +56,15 @@ namespace AutoUpdate.Blob
             using (var stream = response.GetResponseStream())
             {
                 _cache = new MemoryStream();
-                stream.CopyTo(_cache);
+
+                const int BufferSize = 8 * 1024;
+                byte[] buffer = new byte[BufferSize];
+                int len = 0;
+                while ((len = stream.Read(buffer, 0, BufferSize)) != 0)
+                {
+                    _cache.Write(buffer, 0, len);
+                }
+
                 _cache.Seek(0, SeekOrigin.Begin);
             }
         }

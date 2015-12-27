@@ -2,10 +2,9 @@
 using AutoUpdate.Repo;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AutoUpdate.Updater
 {
@@ -16,7 +15,7 @@ namespace AutoUpdate.Updater
         private readonly BlobReader _blobReader;
         private int _interval = 60 * 1000; // 1 min
         private ApplicationRepository _repo;
-        private Task _task;
+        private BackgroundWorker _worker;
 
         public ApplicationUpdater(ApplicationRepository repo, string blobUrl)
         {
@@ -26,9 +25,11 @@ namespace AutoUpdate.Updater
 
         public void Run()
         {
-            if (_task == null)
+            if (_worker == null)
             {
-                _task = Task.Run(() => CheckUpdates());
+                _worker = new BackgroundWorker();
+                _worker.DoWork += WorkerDoWork;
+                _worker.RunWorkerAsync();
             }
         }
 
@@ -65,6 +66,11 @@ namespace AutoUpdate.Updater
 
                 _repo.SetHadData(_blobReader.UpdateTime);
             }
+        }
+
+        private void WorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            CheckUpdates();
         }
     }
 }

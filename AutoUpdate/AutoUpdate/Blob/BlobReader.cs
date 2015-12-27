@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
 
 namespace AutoUpdate.Blob
 {
@@ -69,10 +66,18 @@ namespace AutoUpdate.Blob
         private BlobFile[] GetFiles()
         {
             var metadataXml = Metadata;
-            XDocument doc = XDocument.Parse(metadataXml);
-            var fileNodes = doc.Descendants(XName.Get("Blob"));
-            var fileXmls = fileNodes.Select(n => n.ToString());
-            var files = fileXmls.Select(xml => new BlobFile(xml));
+            var doc = new XmlDocument();
+            doc.LoadXml(metadataXml);
+            var fileNodes = doc.SelectNodes("//Blob");
+
+            var files = new List<BlobFile>(fileNodes.Count);
+            foreach(XmlNode fileNode in fileNodes)
+            {
+                var xml = fileNode.OuterXml;
+                var blobFile = new BlobFile(xml);
+                files.Add(blobFile);
+            }
+
             return files.ToArray();
         }
 
@@ -91,8 +96,14 @@ namespace AutoUpdate.Blob
 
         private DateTime GetUpdateTime()
         {
-            var updateTimes = Files.Select(f => f.UpdateTime);
-            var latest = updateTimes.Max();
+            DateTime latest = DateTime.MinValue;
+            foreach (var file in Files)
+            {
+                if (file.UpdateTime > latest)
+                {
+                    latest = file.UpdateTime;
+                }
+            }
             return latest;
         }
     }
