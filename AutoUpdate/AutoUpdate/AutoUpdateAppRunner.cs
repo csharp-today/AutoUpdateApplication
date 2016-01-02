@@ -13,18 +13,20 @@ namespace AutoUpdate
 {
     public class AutoUpdateAppRunner
     {
+        private readonly ApplicationUpdater _appUpdater;
         private readonly ApplicationRepository _repo;
 
         public AutoUpdateAppRunner(string blobUrl)
         {
             _repo = new ApplicationRepository();
-            var appUpdater = new ApplicationUpdater(_repo, blobUrl);
-            appUpdater.Run();
+            _appUpdater = new ApplicationUpdater(_repo, blobUrl);
+            _appUpdater.Run();
         }
 
         public void Run(string[] args)
         {
             WaitForAppAvailability();
+
             try
             {
                 var dir = _repo.GenerateExecutiveArea();
@@ -34,6 +36,8 @@ namespace AutoUpdate
                 app.Start(args);
             }
             catch (Exception) when (InvalidateRepo()) { }
+
+            WaitForFirstUpdateTrail();
         }
 
         private Type FindExecutive(string dir)
@@ -87,8 +91,21 @@ namespace AutoUpdate
         {
             while (!_repo.HasData)
             {
-                Thread.Sleep(100);
+                WaitSleep();
             }
+        }
+
+        private void WaitForFirstUpdateTrail()
+        {
+            while (!_appUpdater.FirstUpdateTried)
+            {
+                WaitSleep();
+            }
+        }
+
+        private static void WaitSleep()
+        {
+            Thread.Sleep(100);
         }
     }
 }

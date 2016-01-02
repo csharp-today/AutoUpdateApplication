@@ -17,6 +17,8 @@ namespace AutoUpdate.Updater
         private ApplicationRepository _repo;
         private BackgroundWorker _worker;
 
+        public bool FirstUpdateTried { get; private set; }
+
         public ApplicationUpdater(ApplicationRepository repo, string blobUrl)
         {
             _blobReader = new BlobReader(blobUrl);
@@ -50,6 +52,8 @@ namespace AutoUpdate.Updater
                 _interval = ConsecutiveInterval;
             }
             catch (Exception) { }
+
+            FirstUpdateTried = true;
         }
 
         private void GetUpdateUnsafe()
