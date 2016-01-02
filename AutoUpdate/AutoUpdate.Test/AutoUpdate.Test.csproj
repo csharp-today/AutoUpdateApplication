@@ -56,9 +56,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoUpdate\AutoUpdate.csproj">
+    <ProjectReference Include="..\AutoUpdate\AutoUpdate.Core.csproj">
       <Project>{38e4f271-ab71-4eb9-b735-a8a2ee05f89d}</Project>
-      <Name>AutoUpdate</Name>
+      <Name>AutoUpdate.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

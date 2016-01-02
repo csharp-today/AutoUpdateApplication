@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate.Example.Stub", "AutoUpdate.Example.Stub\AutoUpdate.Example.Stub.csproj", "{B6AA7E38-30EA-4A3A-8B99-D4AB137587DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate", "AutoUpdate\AutoUpdate.csproj", "{38E4F271-AB71-4EB9-B735-A8A2EE05F89D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate.Core", "AutoUpdate\AutoUpdate.Core.csproj", "{38E4F271-AB71-4EB9-B735-A8A2EE05F89D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate.Example.Logic", "AutoUpdate.Example.Logic\AutoUpdate.Example.Logic.csproj", "{C45C92A1-C3B5-4236-A42E-E1180B2D0477}"
 EndProject
