@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace AutoUpdate.Blob
 {
-    internal class BlobFile
+    public class BlobFile
     {
         private readonly XmlDocument xml;
 
@@ -29,7 +29,7 @@ namespace AutoUpdate.Blob
             get
             {
                 var timeNode = xml.SelectSingleNode("//Last-Modified");
-                var time = Convert.ToDateTime(timeNode.InnerText);
+                var time = Convert.ToDateTime(timeNode.InnerText).ToUniversalTime();
                 return time;
             }
         }

@@ -7,10 +7,10 @@ using System.Xml;
 
 namespace AutoUpdate.Blob
 {
-    internal class BlobReader
+    public class BlobReader
     {
         private BlobFile[] _files;
-        private string _metadata;
+        protected string _metadata;
         private DateTime? _updateTime;
         private readonly string _url;
 
@@ -20,7 +20,7 @@ namespace AutoUpdate.Blob
             {
                 if (_files == null)
                 {
-                    _files = GetFiles();
+                    _files = GetFiles(Metadata);
                 }
                 return _files;
             }
@@ -44,7 +44,7 @@ namespace AutoUpdate.Blob
             {
                 if (_updateTime == null)
                 {
-                    _updateTime = GetUpdateTime();
+                    _updateTime = GetUpdateTime(Files);
                 }
                 return _updateTime.Value;
             }
@@ -63,9 +63,8 @@ namespace AutoUpdate.Blob
             }
         }
 
-        private BlobFile[] GetFiles()
+        protected BlobFile[] GetFiles(string metadataXml)
         {
-            var metadataXml = Metadata;
             var doc = new XmlDocument();
             doc.LoadXml(metadataXml);
             var fileNodes = doc.SelectNodes("//Blob");
@@ -81,6 +80,19 @@ namespace AutoUpdate.Blob
             return files.ToArray();
         }
 
+        protected DateTime GetUpdateTime(IEnumerable<BlobFile> files)
+        {
+            DateTime latest = DateTime.MinValue;
+            foreach (var file in files)
+            {
+                if (file.UpdateTime > latest)
+                {
+                    latest = file.UpdateTime;
+                }
+            }
+            return latest;
+        }
+
         private string GetMetadata()
         {
             var request = WebRequest.Create(
@@ -92,19 +104,6 @@ namespace AutoUpdate.Blob
                 var metadata = reader.ReadToEnd();
                 return metadata;
             }
-        }
-
-        private DateTime GetUpdateTime()
-        {
-            DateTime latest = DateTime.MinValue;
-            foreach (var file in Files)
-            {
-                if (file.UpdateTime > latest)
-                {
-                    latest = file.UpdateTime;
-                }
-            }
-            return latest;
         }
     }
 }
