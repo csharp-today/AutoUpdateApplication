@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate.Example.Logic", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate.Test", "AutoUpdate.Test\AutoUpdate.Test.csproj", "{607F555C-27B9-4DBE-944F-10B09E527089}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdate.Example.ServiceStub", "AutoUpdate.Example.ServiceStub\AutoUpdate.Example.ServiceStub.csproj", "{D30708B7-9309-44F1-AE30-24DF5A01CAAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{607F555C-27B9-4DBE-944F-10B09E527089}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{607F555C-27B9-4DBE-944F-10B09E527089}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{607F555C-27B9-4DBE-944F-10B09E527089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D30708B7-9309-44F1-AE30-24DF5A01CAAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30708B7-9309-44F1-AE30-24DF5A01CAAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30708B7-9309-44F1-AE30-24DF5A01CAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30708B7-9309-44F1-AE30-24DF5A01CAAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
