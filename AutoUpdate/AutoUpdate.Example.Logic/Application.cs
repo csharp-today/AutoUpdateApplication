@@ -10,6 +10,7 @@ namespace AutoUpdate.Example.Logic
         public void Start(string[] args)
         {
             Console.WriteLine("True logic should be here");
+            Console.WriteLine("I'm using AutoUpdate.Common 1.0.0 NuGet package.");
         }
     }
 }
