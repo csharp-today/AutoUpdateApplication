@@ -13,8 +13,7 @@ namespace AutoUpdate.Example.ServiceStub
         static void Main()
         {
             var service = new Service();
-            //ServiceBase.Run(service);
-            service.ManualStart();
+            ServiceBase.Run(service);
         }
     }
 }
