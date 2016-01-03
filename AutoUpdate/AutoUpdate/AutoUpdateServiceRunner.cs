@@ -31,6 +31,7 @@ namespace AutoUpdate
         public void StopService()
         {
             Service.Stop();
+            WaitForFirstUpdateTrail();
         }
     }
 }

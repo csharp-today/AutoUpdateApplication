@@ -81,6 +81,7 @@ namespace AutoUpdate
                         if (i.Name == interfaceName)
                         {
                             autoUpdateInterface = i;
+                            break;
                         }
                     }
 
