@@ -17,10 +17,15 @@ namespace AutoUpdate
 
         public void Run(string[] args)
         {
-            var app = FindInterface<IAutoUpdateApplication>();
-            app.Start(args);
-
-            WaitForFirstUpdateTrail();
+            try
+            {
+                var app = FindInterface<IAutoUpdateApplication>();
+                app.Start(args);
+            }
+            finally
+            {
+                WaitForFirstUpdateTrail();
+            }
         }
     }
 }

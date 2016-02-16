@@ -25,13 +25,27 @@ namespace AutoUpdate
 
         public void StartService()
         {
-            Service.Start();
+            try
+            {
+                Service.Start();
+            }
+            catch (Exception ex)
+            {
+                WaitForFirstUpdateTrail();
+                throw new Exception("Can't start service", ex);
+            }
         }
 
         public void StopService()
         {
-            Service.Stop();
-            WaitForFirstUpdateTrail();
+            try
+            {
+                Service.Stop();
+            }
+            finally
+            {
+                WaitForFirstUpdateTrail();
+            }
         }
     }
 }
