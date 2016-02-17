@@ -33,10 +33,26 @@ namespace AutoUpdate.Repo
             }
         }
 
+        private Guid AppId
+        {
+            get
+            {
+                var guid = Settings.Default.AppId;
+                if (guid == Guid.Empty)
+                {
+                    guid = Guid.NewGuid();
+                    Settings.Default.AppId = guid;
+                    Settings.Default.Save();
+                }
+                return guid;
+            }
+        }
+
         public ApplicationRepository()
         {
-            var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            _dataPath = Path.Combine(appData, "AutoUpdate");
+            var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var appPath = Path.Combine("AutoUpdate", AppId.ToString());
+            _dataPath = Path.Combine(appDataPath, appPath);
         }
 
         public void AddFile(string name, MemoryStream data)

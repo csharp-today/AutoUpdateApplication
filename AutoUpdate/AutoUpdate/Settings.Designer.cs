@@ -46,5 +46,17 @@ namespace AutoUpdate {
                 this["HasData"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00000000-0000-0000-0000-000000000000")]
+        public global::System.Guid AppId {
+            get {
+                return ((global::System.Guid)(this["AppId"]));
+            }
+            set {
+                this["AppId"] = value;
+            }
+        }
     }
 }
