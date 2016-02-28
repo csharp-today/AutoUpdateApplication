@@ -35,12 +35,12 @@
     <StartupObject>AutoUpdate.Example.ServiceStub.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoUpdate.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoUpdate.Common.1.0.0.0\lib\net20\AutoUpdate.Common.dll</HintPath>
+    <Reference Include="AutoUpdate.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoUpdate.Common.1.1.0.0\lib\net20\AutoUpdate.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AutoUpdate.Core, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoUpdate.Core.1.1.0.0\lib\net20\AutoUpdate.Core.dll</HintPath>
+    <Reference Include="AutoUpdate.Core, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoUpdate.Core.1.1.3.0\lib\net20\AutoUpdate.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
