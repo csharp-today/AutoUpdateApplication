@@ -1,4 +1,5 @@
-﻿using AutoUpdate.Repo;
+﻿using AutoUpdate.Common;
+using AutoUpdate.Repo;
 using AutoUpdate.Updater;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace AutoUpdate
 
         private string _executiveAreaDirectory;
 
+        protected IAutoUpdateMetadata Metadata { get; }
+
         private string ExecutiveAreaDirectory
         {
             get
@@ -30,6 +33,11 @@ namespace AutoUpdate
 
         public BaseRunner(string blobUrl)
         {
+            Metadata = new AutoUpdateMetadata
+            {
+                BlobSourceUrl = blobUrl
+            };
+
             _repo = new ApplicationRepository();
             _appUpdater = new ApplicationUpdater(_repo, blobUrl);
             _appUpdater.Run();

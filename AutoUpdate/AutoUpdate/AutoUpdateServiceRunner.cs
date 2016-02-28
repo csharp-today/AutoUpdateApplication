@@ -16,6 +16,7 @@ namespace AutoUpdate
                 if (_service == null)
                 {
                     _service = FindInterface<IAutoUpdateService>();
+                    _service.Initialize(Metadata);
                 }
                 return _service;
             }

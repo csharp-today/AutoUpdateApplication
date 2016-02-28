@@ -13,6 +13,10 @@ namespace AutoUpdate.Example.Logic
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             LogFileName);
 
+        public void Initialize(IAutoUpdateMetadata metadata)
+        {
+        }
+
         public void Start()
         {
             Write("AutoUpdate.Example.Logic - START");

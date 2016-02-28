@@ -7,10 +7,16 @@ namespace AutoUpdate.Example.Logic
 {
     public class Application : IAutoUpdateApplication
     {
-        public void Start(string[] args)
+        public void Initialize(IAutoUpdateMetadata metadata)
+        {
+        }
+
+        public int Start(string[] args)
         {
             Console.WriteLine("True logic should be here");
-            Console.WriteLine("I'm using AutoUpdate.Common 1.0.0 NuGet package.");
+            Console.WriteLine("I'm using AutoUpdate.Common 1.1.0 NuGet package.");
+
+            return 0;
         }
     }
 }

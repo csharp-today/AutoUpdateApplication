@@ -20,6 +20,7 @@ namespace AutoUpdate
             try
             {
                 var app = FindInterface<IAutoUpdateApplication>();
+                app.Initialize(Metadata);
                 app.Start(args);
             }
             finally
